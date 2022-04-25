@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
-use App\Models\GasStation;
+use App\Models\FuelStation;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class GasStationSeeder extends Seeder
+class FuelStationSeeder extends Seeder
 {
     private $request;
 
@@ -24,7 +24,7 @@ class GasStationSeeder extends Seeder
     public function run()
     {
         foreach ($this->request->json('results') as $key => $value) {
-            GasStation::create([
+            FuelStation::create([
                 'uuid' => $value['_id'],
                 'rfc' => $value['rfc'],
                 'razon_social' => $value['razonsocial'],

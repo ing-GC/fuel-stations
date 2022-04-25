@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gas_stations', function (Blueprint $table) {
+        Schema::create('fuel_stations', function (Blueprint $table) {
             $table->id();
             $table->uuid();
             $table->string('rfc');
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gas_stations');
+        Schema::dropIfExists('fuel_stations');
     }
 };
