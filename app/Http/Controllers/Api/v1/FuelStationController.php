@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Interfaces\FuelStationInterface;
+use App\Http\Requests\StoreFuelStationRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class FuelStationController extends Controller
@@ -41,12 +42,29 @@ class FuelStationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreFuelStationRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreFuelStationRequest $request)
     {
-        //
+        $data = $request->after();
+
+        return rescue(function () use ($data) {
+            $fuelStation = $this->fuelStationRepository->create($data);
+
+            return response([
+                'message' => 'Fuel station created succesfully',
+                'data' => $fuelStation,
+            ], Response::HTTP_CREATED);
+        }, function ($e) {
+            throw new HttpResponseException(
+                response([
+                    'errors' => [
+                        'message' => $e->getMessage(),
+                    ]
+                ], Response::HTTP_INTERNAL_SERVER_ERROR)
+            );
+        });
     }
 
     /**

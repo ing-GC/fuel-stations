@@ -28,6 +28,8 @@ class FuelStationResource extends JsonResource
             'codigopostal' => $this->codigo_postal,
             'calle' => $this->calle,
             'colonia' => $this->colonia,
+            'municipio' => $this->municipality->name,
+            'estado' => $this->state->name,
             'regular' => $this->regular,
             'premium' => $this->premium,
         ];
