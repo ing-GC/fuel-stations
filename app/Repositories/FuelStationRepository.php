@@ -21,12 +21,12 @@ class FuelStationRepository implements FuelStationInterface
         return FuelStationResource::make($fuelStation);
     }
 
-    public function create(array $data)
+    public function create($data)
     {
         //
     }
 
-    public function update(FuelStation $fuelStation, array $data)
+    public function update(FuelStation $fuelStation, $data)
     {
         //
     }
