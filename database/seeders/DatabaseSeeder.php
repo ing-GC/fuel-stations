@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(FuelStationSeeder::class);
+        $this->call(StateSeeder::class);
+        $this->call(MunicipalitySeeder::class);
     }
 }

@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('codigo_postal');
             $table->string('calle');
             $table->string('colonia')->nullable();
-            $table->string('municipio')->nullable();
+            $table->foreignId('municipio')->nullable()->constrained('municipalities');
+            $table->foreignId('estado')->nullable()->constrained('states');
             $table->string('regular');
             $table->string('premium');
             $table->timestamps();
