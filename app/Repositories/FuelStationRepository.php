@@ -47,7 +47,9 @@ class FuelStationRepository implements FuelStationInterface
 
     public function update(FuelStation $fuelStation, $data)
     {
-        //
+        $fuelStation->update((array) $data);
+
+        return FuelStationResource::make($fuelStation);
     }
 
     public function delete(FuelStation $fuelStation)

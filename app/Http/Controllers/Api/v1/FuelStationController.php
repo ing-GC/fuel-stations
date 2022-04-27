@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Models\FuelStation;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Interfaces\FuelStationInterface;
 use App\Http\Requests\StoreFuelStationRequest;
+use App\Http\Requests\UpdateFuelStationRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class FuelStationController extends Controller
@@ -81,13 +81,30 @@ class FuelStationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateFuelStationRequest  $request
      * @param  \App\Models\FuelStation  $fuelStation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FuelStation $fuelStation)
+    public function update(UpdateFuelStationRequest $request, FuelStation $fuelStation)
     {
-        //
+        $data = $request->after();
+
+        return rescue(function () use ($fuelStation, $data) {
+            $fuelStation = $this->fuelStationRepository->update($fuelStation, $data);
+
+            return response([
+                'message' => 'Fuel station updated succesfully',
+                'data' => $fuelStation,
+            ], Response::HTTP_OK);
+        }, function ($e) {
+            throw new HttpResponseException(
+                response([
+                    'errors' => [
+                        'message' => $e->getMessage(),
+                    ]
+                ], Response::HTTP_INTERNAL_SERVER_ERROR)
+            );
+        });
     }
 
     /**
