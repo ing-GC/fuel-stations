@@ -23,24 +23,7 @@ class FuelStationRepository implements FuelStationInterface
 
     public function create($data)
     {
-        $fuelStation = FuelStation::create([
-            'uuid' => $data->uuid,
-            'rfc' => $data->rfc,
-            'razon_social' => $data->razonsocial,
-            'date_insert' => $data->date_insert,
-            'numero_permiso' => $data->numeropermiso,
-            'fecha_aplicacion' => $data->fechaaplicacion,
-            'permiso_id' => $data->permisoid,
-            'longitude' => $data->longitude,
-            'latitude' => $data->latitude,
-            'codigo_postal' => $data->codigopostal,
-            'calle' => $data->calle,
-            'colonia' => $data->colonia,
-            'municipio' => $data->municipio,
-            'estado' => $data->estado,
-            'regular' => $data->regular,
-            'premium' => $data->premium,
-        ]);
+        $fuelStation = FuelStation::create((array) $data);
 
         return FuelStationResource::make($fuelStation);
     }
