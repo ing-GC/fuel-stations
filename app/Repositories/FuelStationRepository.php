@@ -13,7 +13,7 @@ class FuelStationRepository implements FuelStationInterface
 
     public function all()
     {
-        return new FuelStationCollection(FuelStation::paginate($this->pagination));
+        return new FuelStationCollection(FuelStation::all());
     }
 
     public function show(FuelStation $fuelStation)
