@@ -37,6 +37,6 @@ class FuelStationRepository implements FuelStationInterface
 
     public function delete(FuelStation $fuelStation)
     {
-        //
+        $fuelStation->delete();
     }
 }

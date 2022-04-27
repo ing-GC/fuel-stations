@@ -115,6 +115,20 @@ class FuelStationController extends Controller
      */
     public function destroy(FuelStation $fuelStation)
     {
-        //
+        return rescue(function () use ($fuelStation) {
+            $this->fuelStationRepository->delete($fuelStation);
+
+            return response([
+                'message' => 'Fuel station deleted succesfully',
+            ], Response::HTTP_NO_CONTENT);
+        }, function ($e) {
+            throw new HttpResponseException(
+                response([
+                    'errors' => [
+                        'message' => $e->getMessage(),
+                    ]
+                ], Response::HTTP_INTERNAL_SERVER_ERROR)
+            );
+        });
     }
 }
