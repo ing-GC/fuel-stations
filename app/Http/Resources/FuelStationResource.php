@@ -16,6 +16,7 @@ class FuelStationResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             '_id' => $this->uuid,
             'rfc' => $this->rfc,
             'razonsocial' => $this->razon_social,
