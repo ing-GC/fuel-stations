@@ -99,7 +99,9 @@ class UpdateFuelStationRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $errors = (new ValidationException($validator))->errors();
+        $errors = [
+            'errors' => (new ValidationException($validator))->errors(),
+        ];
 
         throw new HttpResponseException(
             response($errors, Response::HTTP_UNPROCESSABLE_ENTITY)
